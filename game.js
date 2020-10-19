@@ -16,6 +16,22 @@ function playSound(name) {
     audio.play();
 }
 
+function checkAnswer(currentLevel) {
+  // for (i = 0; i < currentLevel; i++) {
+  //   if (userClickedPattern === gamePattern) {
+  //     console.log("success");
+  //   } else {
+  //     console.log("wrong");
+  //   }
+  // }
+
+  if (userClickedPattern[currentLevel] == gamePattern[currentLevel]) {
+    console.log("success");
+  } else {
+    console.log("wrong");
+  }
+}
+
 function nextSequence() {
 
   let randomNumber = Math.floor(Math.random() * 4);
@@ -34,8 +50,9 @@ function nextSequence() {
   $(".btn").click(function() {
       let userChosenColor = this.id;
       userClickedPattern.push(userChosenColor);
-      console.log(userClickedPattern);
+    
       playSound(userChosenColor);
+      checkAnswer(level - 1);
   });
 }
 

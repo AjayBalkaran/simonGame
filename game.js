@@ -10,13 +10,6 @@ let started = false;
 let level = 0; 
 
 
-// add Sounds to button clicks
-function playSound(name) {
-    let audio = new Audio(`sounds/${name}.mp3`);
-    audio.play();
-}
-
-
 // created function that check user input
 function checkAnswer(currentLevel) {
   if (userClickedPattern[currentLevel] === gamePattern[currentLevel]) {
@@ -51,6 +44,22 @@ function nextSequence() {
   playSound(randomChosenColour);
 }
 
+// add Sounds to button clicks
+function playSound(name) {
+  let audio = new Audio(`sounds/${name}.mp3`);
+  audio.play();
+}
+
+function animatePress(currentColor) {
+  $(`#${currentColor}`).addClass("pressed");
+  setTimeout(function () {
+    $(`#${currentColor}`).removeClass("pressed");
+  }, 100);
+}
+
+
+
+
 // check if a key is pressed
 $(document).keydown(function(){
   if (!started) {
@@ -64,9 +73,9 @@ $(document).keydown(function(){
 $(".btn").click(function() {
   let userChosenColor = $(this).attr("id");
   userClickedPattern.push(userChosenColor);
-
+  //play sound and animate button
   playSound(userChosenColor);
-  // animatePress(userChosenColor);
+  animatePress(userChosenColor);
   // Call checkAnswer()
   checkAnswer(userClickedPattern.length - 1);
 });
